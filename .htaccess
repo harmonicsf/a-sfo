@@ -1,0 +1,68 @@
+#	Mod_security can interfere with uploading of content such as attachments. If you
+#	cannot attach files, remove the "#" from the lines below.
+#<IfModule mod_security.c>
+#	SecFilterEngine Off
+#	SecFilterScanPOST Off
+#</IfModule>
+
+ErrorDocument 401 default
+ErrorDocument 403 default
+ErrorDocument 404 default
+ErrorDocument 500 default
+
+<IfModule mod_rewrite.c>
+	RewriteEngine On
+
+	#	If you are having problems with the rewrite rules, remove the "#" from the
+	#	line that begins "RewriteBase" below. You will also have to change the path
+	#	of the rewrite to reflect the path to your XenForo installation.
+	#RewriteBase /cs
+
+	#	This line may be needed to enable WebDAV editing with PHP as a CGI.
+	#RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+	RewriteCond %{REQUEST_FILENAME} -f [OR]
+	RewriteCond %{REQUEST_FILENAME} -l [OR]
+	RewriteCond %{REQUEST_FILENAME} -d
+	RewriteRule ^.*$ - [NC,L]
+	RewriteRule ^(data/|js/|styles/|install/|favicon\.ico|crossdomain\.xml|robots\.txt) - [NC,L]
+	RewriteRule ^.*$ index.php [NC,L]
+</IfModule>
+
+
+Addtype application/zip .zip
+Addtype application/x-rar-compressed .rar
+AddType application/vnd.sonyericsson.mms-template tpl
+AddType application/vnd.eri.thm .thm
+AddType application/vnd.mophun.application .mpn
+AddType application/vnd.mophun.certificate .mpc
+AddType application/vnd.smaf .mmf
+AddType application/x-tar .hid
+Addtype application/smil .smil
+Addtype application/smil .smi
+Addtype application/java-archive .jar
+Addtype application/vnd.symbian.install .sis
+Addtype application/vnd.wap.mms-message .mms
+Addtype application/octet-stream .exe
+Addtype text/x-imelody .imy
+Addtype text/x-emelody .emy
+Addtype text/x-vcard .vcf
+Addtype text/x-vcalendar .vcs
+Addtype text/calendar .ics
+AddType text/vnd.sun.j2me.app-descriptor;charset=UTF-8 .jad
+addtype text/x-vmel .mel
+addtype text/x-vmel .emy
+addtype audio/imelody .imy
+AddType audio/amr .amr
+AddType audio/x-wav .wav
+Addtype audio/wav .wav
+Addtype audio/midi .midi
+Addtype audio/midi .mid
+Addtype audio/rmf .rmf
+Addtype image/jpeg .jpg
+Addtype image/jpeg .jpeg
+Addtype image/gif .gif
+Addtype image/png .png
+Addtype image/bmp .bmp
+AddType video/mp4 .mp4
+Addtype video/3gpp .3gp

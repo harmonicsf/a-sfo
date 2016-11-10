@@ -1,0 +1,3 @@
+<?php
+if(!$auth) noaccess();
+?>
